@@ -10,7 +10,7 @@ app.get('/', (req, res) => {
     res.status(200).send('Welcome to Admin Controller')
 })
 
-app.get('/all', (req, res) => {
+app.get('/students', (req, res) => {
 
     Student.find().then((students) => {
         res.status(200).send(students);
