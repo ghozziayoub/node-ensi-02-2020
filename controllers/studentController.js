@@ -1,6 +1,8 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
+
 const { Student } = require('./../models/student');
+const {mongoose} = require('./../config/connector');
 
 const app = express();
 
@@ -10,8 +12,10 @@ app.get('/', (req, res) => {
 })
 
 app.post('/register', (req, res) => {
-    let data = req.body;
-    data.password = bcrypt.hashSync(data.password, 10);
+    let data = req.body;    
+
+    var salt = bcrypt.genSaltSync(10);
+    data.password = bcrypt.hashSync(data.password, salt);
 
     let student = new Student({
         firstname: data.firstname,
@@ -20,7 +24,7 @@ app.post('/register', (req, res) => {
         address: data.address,
         phone: data.phone,
         email: data.email,
-        state: data.state,
+        password:data.password
     })
 
     student.save().then((studentFromDataBase) => {

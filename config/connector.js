@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://ds243812.mlab.com:43812/studentsTasksApp',{
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/studentsTasksApp'
+
+mongoose.connect(MONGODB_URI,{
     useCreateIndex:true,
     useNewUrlParser:true,
     useUnifiedTopology:true,

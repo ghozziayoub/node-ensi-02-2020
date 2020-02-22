@@ -23,7 +23,8 @@ const StudentSchema = new mongoose.Schema({
     },
     state: {
         type: String,
-        required: true
+        required: true,
+        default:false,
     },
     email: {
         type: String,
@@ -33,7 +34,7 @@ const StudentSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
-    },
+    }
 });
 
 const Student = mongoose.model('student', StudentSchema);
