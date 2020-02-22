@@ -2,7 +2,7 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 
 const { Student } = require('./../models/student');
-const {mongoose} = require('./../config/connector');
+const { mongoose } = require('./../config/connector');
 
 const app = express();
 
@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
 })
 
 app.post('/register', (req, res) => {
-    let data = req.body;    
+    let data = req.body;
 
     var salt = bcrypt.genSaltSync(10);
     data.password = bcrypt.hashSync(data.password, salt);
@@ -24,7 +24,7 @@ app.post('/register', (req, res) => {
         address: data.address,
         phone: data.phone,
         email: data.email,
-        password:data.password
+        password: data.password
     })
 
     student.save().then((studentFromDataBase) => {
