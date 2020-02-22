@@ -6,6 +6,7 @@ const student = require('./controllers/studentController')
 const admin = require('./controllers/adminController')
 
 const app = express();
+const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -15,4 +16,4 @@ app.use('/admin',admin);
 
 app.get('/', (req, res) => { res.status(200).send('Welcome to FormaLab Server') })
 
-app.listen(3000,() => console.log('Server Started'))
+app.listen(port,() => console.log('Server Started'))
