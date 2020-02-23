@@ -16,7 +16,7 @@ app.post('/register', (req, res) => {
     var salt = bcrypt.genSaltSync(10);
     data.password = bcrypt.hashSync(data.password, salt);
 
-    let student = new Admin({
+    let admin = new Admin({
         email: data.email,
         password: data.password
     })
