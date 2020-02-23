@@ -61,4 +61,19 @@ app.put('/endTask', (req, res) => {
     })
 })
 
+app.put('/update', (req, res) => {
+
+    let taskId = req.body.taskId;
+    let title = req.body.title;
+
+    Task.findOne({_id:taskId}).then((task) => {
+        task.completed = !task.completed;
+        task.title = title ;
+        task.save();
+        res.status(200).send({message:"Task Ended !"});
+    }).catch((error) => {
+        res.status(400).send(error);
+    })
+})
+
 module.exports = app
