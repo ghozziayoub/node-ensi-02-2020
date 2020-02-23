@@ -31,6 +31,32 @@ app.post('/register', (req, res) => {
     });
 })
 
+
+app.post('/login', (req, res) => {
+
+    let email = req.body.email;
+    let password = req.body.password;
+
+    Admin.findOne({email}).then((admin)=>{
+        if(!admin){
+            res.status(404).send({ message: 'Email Incorrect !' });
+        }else{
+            let compare = bcrypt.compareSync(password,admin.password);
+            if(!compare){
+                res.status(404).send({ message: 'Password Incorrect !' });
+            }else{
+                let token = jwt.sign({adminId:admin._id,role:'admin'},"secretKey");
+                res.status(200).send({token});
+            }
+        }
+    }).catch((error)=>{
+        res.status(400).send(error);
+    })
+
+    
+})
+
+
 app.get('/students', (req, res) => {
     Student.find().then((students) => {
         res.status(200).send(students);
