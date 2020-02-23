@@ -50,7 +50,7 @@ app.post('/login', (req, res) => {
                 res.status(404).send({ message: 'Password Incorrect !' });
             } else {
                 if (!student.state) {
-                    res.status(40).send({ message: 'You are not allowed !' });
+                    res.status(400).send({ message: 'You are not allowed !' });
                 } else {
                     let token = jwt.sign({ studentId: student._id, role: 'student' }, "secretKey");
                     res.status(200).send({ token });
