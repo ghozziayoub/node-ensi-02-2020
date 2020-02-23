@@ -41,7 +41,7 @@ app.post('/login', (req, res) => {
     let email = req.body.email;
     let password = req.body.password;
 
-    Admin.findOne({email}).then((admin)=>{
+    Student.findOne({email}).then((admin)=>{
         if(!admin){
             res.status(404).send({ message: 'Email Incorrect !' });
         }else{
