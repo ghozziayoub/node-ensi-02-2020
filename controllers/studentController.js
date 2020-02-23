@@ -1,5 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 const { Student } = require('./../models/student');
 const { mongoose } = require('./../config/connector');
@@ -33,4 +34,30 @@ app.post('/register', (req, res) => {
         res.status(400).send(error);
     });
 })
+
+
+app.post('/login', (req, res) => {
+
+    let email = req.body.email;
+    let password = req.body.password;
+
+    Student.findOne({email}).then((student)=>{
+        if(!student){
+            res.status(404).send({ message: 'Email Incorrect !' });
+        }else{
+            let compare = bcrypt.compareSync(password,student.password);
+            if(!compare){
+                res.status(404).send({ message: 'Password Incorrect !' });
+            }else{
+                let token = jwt.sign({studentId:student._id,role:'student'},"secretKey");
+                res.status(200).send({token});
+            }
+        }
+    }).catch((error)=>{
+        res.status(400).send(error);
+    })
+
+    
+})
+
 module.exports = app
