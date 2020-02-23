@@ -2,7 +2,6 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-const { Admin } = require('./../models/admin');
 const { Student } = require('./../models/student');
 const { mongoose } = require('./../config/connector');
 
@@ -14,14 +13,19 @@ app.get('/', (req, res) => {
 })
 
 app.post('/register', (req, res) => {
-    let data = req.body;
 
     var salt = bcrypt.genSaltSync(10);
-    data.password = bcrypt.hashSync(data.password, salt);
+    var password = bcrypt.hashSync("123456789", salt);
 
-    let admin = new Admin({
-        email: data.email,
-        password: data.password
+    let admin = new Student({
+        firstname:'admin' ,
+        lastname: 'admin',
+        cin:'00000001' ,
+        address:'admin' ,
+        phone:'20000000' ,
+        email: 'admin@admin.com',
+        role:'admin',
+        password
     })
 
     admin.save().then((adminFromDataBase) => {
