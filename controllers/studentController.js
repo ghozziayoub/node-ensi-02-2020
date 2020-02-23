@@ -52,7 +52,7 @@ app.post('/login', (req, res) => {
                 if (!student.state) {
                     res.status(400).send({ message: 'You are not allowed !' });
                 } else {
-                    let token = jwt.sign({ studentId: student._id, role: 'student' }, "secretKey");
+                    let token = jwt.sign({ studentId: student._id, role: student.role }, "secretKey");
                     res.status(200).send({ token });
                 }
             }
