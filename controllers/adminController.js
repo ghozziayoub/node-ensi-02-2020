@@ -65,5 +65,18 @@ app.get('/students', (req, res) => {
     })
 })
 
+app.put('/state',(req,res)=>{
+
+    let studentId = req.body.studentId;
+
+    Student.findOne({_id:studentId}).then(student=>{
+        student.state = !student.state;
+        student.save();
+        res.status(200).send({message:'state updated !'});
+    }).catch((error) => {
+        res.status(400).send(error);
+    })
+});
+
 
 module.exports = app
