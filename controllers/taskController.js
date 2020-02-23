@@ -48,4 +48,15 @@ app.delete('/delete/:taskId', (req, res) => {
     })
 })
 
+app.put('/endTask', (req, res) => {
+
+    let taskId = req.body.taskId;
+
+    Task.findOne({_id:taskId}).then((task) => {
+        res.status(200).send({message:"Task Ended !"});
+    }).catch((error) => {
+        res.status(400).send(error);
+    })
+})
+
 module.exports = app
