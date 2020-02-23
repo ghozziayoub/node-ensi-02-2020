@@ -25,6 +25,16 @@ app.post('/add', (req, res) => {
     });
 })
 
+app.get('/all/:studentId', (req, res) => {
+    let studentId = req.params.studentId;
+
+    Task.find({studentId}).then((tasks) => {
+        res.status(200).send(tasks);
+    }).catch((error) => {
+        res.status(400).send(error);
+    })
+})
+
 
 
 module.exports = app
