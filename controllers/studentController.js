@@ -41,23 +41,27 @@ app.post('/login', (req, res) => {
     let email = req.body.email;
     let password = req.body.password;
 
-    Student.findOne({email}).then((student)=>{
-        if(!student){
+    Student.findOne({ email }).then((student) => {
+        if (!student) {
             res.status(404).send({ message: 'Email Incorrect !' });
-        }else{
-            let compare = bcrypt.compareSync(password,student.password);
-            if(!compare){
+        } else {
+            let compare = bcrypt.compareSync(password, student.password);
+            if (!compare) {
                 res.status(404).send({ message: 'Password Incorrect !' });
-            }else{
-                let token = jwt.sign({studentId:student._id,role:'student'},"secretKey");
-                res.status(200).send({token});
+            } else {
+                if (!student.state) {
+                    res.status(40).send({ message: 'You are not allowed !' });
+                } else {
+                    let token = jwt.sign({ studentId: student._id, role: 'student' }, "secretKey");
+                    res.status(200).send({ token });
+                }
             }
         }
-    }).catch((error)=>{
+    }).catch((error) => {
         res.status(400).send(error);
     })
 
-    
+
 })
 
 module.exports = app
