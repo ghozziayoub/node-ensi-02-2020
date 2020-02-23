@@ -67,7 +67,6 @@ app.put('/update', (req, res) => {
     let title = req.body.title;
 
     Task.findOne({_id:taskId}).then((task) => {
-        task.completed = !task.completed;
         task.title = title ;
         task.save();
         res.status(200).send({message:"Task Ended !"});
