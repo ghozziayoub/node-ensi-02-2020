@@ -22,7 +22,7 @@ const StudentSchema = new mongoose.Schema({
         required: true
     },
     state: {
-        type: String,
+        type: Boolean,
         required: true,
         default:false,
     },
