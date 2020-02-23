@@ -78,5 +78,15 @@ app.put('/state',(req,res)=>{
     })
 });
 
+app.delete('/delete-student',(req,res)=>{
+
+    let studentId = req.body.studentId;
+
+    Student.findOneAndDelete({_id:studentId}).then(student=>{
+        res.status(200).send({message:'student deleted !'});
+    }).catch((error) => {
+        res.status(400).send(error);
+    })
+});
 
 module.exports = app
