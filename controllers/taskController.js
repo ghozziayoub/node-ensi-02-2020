@@ -69,7 +69,7 @@ app.put('/update', (req, res) => {
     Task.findOne({_id:taskId}).then((task) => {
         task.title = title ;
         task.save();
-        res.status(200).send({message:"Task Ended !"});
+        res.status(200).send({message:"Task updated !"});
     }).catch((error) => {
         res.status(400).send(error);
     })
