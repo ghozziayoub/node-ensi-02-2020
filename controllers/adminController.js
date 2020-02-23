@@ -35,8 +35,6 @@ app.post('/register', (req, res) => {
     });
 })
 
-
-
 app.get('/students', (req, res) => {
     Student.find({role:'student'}).then((students) => {
         res.status(200).send(students);
