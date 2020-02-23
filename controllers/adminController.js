@@ -1,6 +1,7 @@
 const express = require('express');
 
 const { Admin } = require('./../models/admin');
+const { Student } = require('./../models/student');
 const { mongoose } = require('./../config/connector');
 
 const app = express();
@@ -29,7 +30,6 @@ app.post('/register', (req, res) => {
 })
 
 app.get('/students', (req, res) => {
-
     Student.find().then((students) => {
         res.status(200).send(students);
     }).catch((error) => {
