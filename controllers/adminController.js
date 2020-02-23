@@ -82,9 +82,9 @@ app.put('/state',(req,res)=>{
     })
 });
 
-app.delete('/delete-student',(req,res)=>{
+app.delete('/delete-student/:studentId',(req,res)=>{
 
-    let studentId = req.body.studentId;
+    let studentId = req.params.studentId;
 
     Student.findOneAndDelete({_id:studentId}).then(student=>{
         res.status(200).send({message:'student deleted !'});
