@@ -29,7 +29,9 @@ app.get('/all/:studentId', (req, res) => {
     let studentId = req.params.studentId;
 
     Task.find({studentId}).then((tasks) => {
-        res.status(200).send(tasks);
+        let tasksList = _.filter(tasks, { "completed": false });
+        let doneList = _.filter(tasks, { "completed": true });
+        res.status(200).send({tasksList,doneList});
     }).catch((error) => {
         res.status(400).send(error);
     })
