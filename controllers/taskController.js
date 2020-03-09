@@ -38,6 +38,16 @@ app.get('/all/:studentId', (req, res) => {
     })
 })
 
+app.get('/:taskId', (req, res) => {
+    let taskId = req.params.taskId;
+
+    Task.findOne({ _id: taskId }).then((task) => {
+        res.status(200).send(task);
+    }).catch((error) => {
+        res.status(400).send(error);
+    })
+})
+
 app.delete('/delete/:taskId', (req, res) => {
     let taskId = req.params.taskId;
 
