@@ -62,7 +62,6 @@ app.get('/students/all', (req, res) => {
         }
 
         Task.find().then((tasks) => {
-
             let tasksList = _.filter(tasks, { "completed": false });
             let doneList = _.filter(tasks, { "completed": true });
 
