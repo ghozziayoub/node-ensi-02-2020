@@ -76,7 +76,7 @@ app.get('/students/all', (req, res) => {
                 donesNmbers.push(studentsDones.length);
             }
 
-            res.status(200).send({ firstnames, tasksList, doneList });
+            res.status(200).send({ students, tasksList, doneList });
 
         }).catch((error) => {
             res.status(400).send(error);
