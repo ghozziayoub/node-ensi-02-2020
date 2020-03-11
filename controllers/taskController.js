@@ -52,9 +52,11 @@ app.get('/:taskId', (req, res) => {
 
 app.get('/all/students', (req, res) => {
 
-    Student.find().then((students) => {
+    Student.find({ role: 'student' }).then((students) => {
         res.status(200).send(students);
-    });
+    }).catch((error) => {
+        res.status(400).send(error);
+    })
 
 })
 
