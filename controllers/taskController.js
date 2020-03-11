@@ -2,6 +2,8 @@ const express = require('express');
 const _ = require('lodash');
 
 const { Task } = require('./../models/task');
+const { Student } = require('./../models/student');
+
 const { mongoose } = require('./../config/connector');
 
 const app = express();
@@ -46,6 +48,14 @@ app.get('/:taskId', (req, res) => {
     }).catch((error) => {
         res.status(400).send(error);
     })
+})
+
+app.get('/all/students', (req, res) => {
+
+    Student.find().then((students) => {
+        res.status(200).send(students);
+    });
+
 })
 
 app.delete('/delete/:taskId', (req, res) => {
