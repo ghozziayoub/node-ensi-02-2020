@@ -52,8 +52,16 @@ app.get('/:taskId', (req, res) => {
 
 app.get('/students/all', (req, res) => {
 
+    let firstnames = [];
+    let tasks = [];
+    let dones = [];
+
     Student.find({ role: 'student' }).then((students) => {
-        res.status(200).send(students);
+
+        firstnames = _.filter(students, firstname);
+        res.status(200).send(firstnames);
+
+
     }).catch((error) => {
         res.status(400).send(error);
     })
