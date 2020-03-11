@@ -50,7 +50,7 @@ app.get('/:taskId', (req, res) => {
     })
 })
 
-app.get('/all/students', (req, res) => {
+app.get('/students/all', (req, res) => {
 
     Student.find({ role: 'student' }).then((students) => {
         res.status(200).send(students);
