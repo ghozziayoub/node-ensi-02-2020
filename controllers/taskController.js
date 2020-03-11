@@ -75,7 +75,8 @@ app.get('/students/all', (req, res) => {
                 studentsDones = _.filter(doneList, { "studentId": students[i]._id })
                 donesNmbers.push(studentsDones.length);
             }*/
-            studentsTasks = _.filter(tasksList, { "studentId": students[0]._id })
+            let id = students[0]._id;
+            studentsTasks = _.filter(tasksList, { "studentId": id })
             tasksNumbers.push(studentsTasks.length);
 
             res.status(200).send({ firstnames, tasksNumbers, doneList });
