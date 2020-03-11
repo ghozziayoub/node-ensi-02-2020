@@ -66,8 +66,6 @@ app.get('/students/all', (req, res) => {
             let tasksList = _.filter(tasks, { "completed": false });
             let doneList = _.filter(tasks, { "completed": true });
 
-
-
             for (let i = 0; i < students.length; i++) {
                 let id = students[i]._id.toString();
 
