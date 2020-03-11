@@ -66,20 +66,19 @@ app.get('/students/all', (req, res) => {
             let tasksList = _.filter(tasks, { "completed": false });
             let doneList = _.filter(tasks, { "completed": true });
 
-            let studentsTasks = [];
-            let studentsDones = [];
 
-            /*for (let i = 0; i < students.length; i++) {
-                studentsTasks = _.filter(tasksList, { "studentId": students[i]._id })
+
+            for (let i = 0; i < students.length; i++) {
+                let id = students[i]._id.toString();
+
+                studentsTasks = _.filter(tasksList, ['studentId', id])
                 tasksNumbers.push(studentsTasks.length);
-                studentsDones = _.filter(doneList, { "studentId": students[i]._id })
-                donesNmbers.push(studentsDones.length);
-            }*/
-            let id = students[0]._id;
-            studentsTasks = _.filter(tasksList, { "studentId": id })
-            tasksNumbers.push(studentsTasks.length);
 
-            res.status(200).send({ firstnames, tasksNumbers, doneList });
+                studentsDones = _.filter(doneList, ['studentId', id])
+                donesNmbers.push(studentsDones.length);
+            }
+
+            res.status(200).send({ firstnames, tasksNumbers, donesNmbers });
 
         }).catch((error) => {
             res.status(400).send(error);
