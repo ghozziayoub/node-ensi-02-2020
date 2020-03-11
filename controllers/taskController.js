@@ -57,11 +57,10 @@ app.get('/students/all', (req, res) => {
     let dones = [];
 
     Student.find({ role: 'student' }).then((students) => {
-
-        firstnames = _.filter(students, firstname);
+        for (let i = 0; i < students.length; i++) {
+            firstnames.push(students[i].firstname);
+        }
         res.status(200).send(firstnames);
-
-
     }).catch((error) => {
         res.status(400).send(error);
     })
